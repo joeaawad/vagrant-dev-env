@@ -1,0 +1,6 @@
+- hosts: all
+  roles:
+    - common-packages
+    - docker
+    - python3
+    - oh-my-zsh
