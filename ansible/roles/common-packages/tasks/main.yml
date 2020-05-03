@@ -1,0 +1,28 @@
+---
+- include: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- name: Install common packages
+  become: true
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - curl
+    - git
+    - gnupg
+    - htop
+    - iotop
+    - iptraf
+    - mtr
+    - net-tools
+    - ntp
+    - sysstat
+    - time
+    - tmux
+    - unzip
+    - vim
+    - zip
