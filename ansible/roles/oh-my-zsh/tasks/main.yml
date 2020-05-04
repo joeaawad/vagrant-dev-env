@@ -1,0 +1,35 @@
+---
+- name: Install zsh
+  become: true
+  package:
+    name: zsh
+    state: latest
+
+- name: Clone oh-my-zsh repo
+  git:
+    repo: git://github.com/robbyrussell/oh-my-zsh.git
+    dest: /home/vagrant/.oh-my-zsh
+
+- name: Create a new zsh config from the template in the repo
+  copy:
+    src: ~/.zshrc
+    dest: /home/vagrant/.zshrc
+
+- name: Fix home directory in .zshrc
+  replace:
+    path: /home/vagrant/.zshrc
+    regexp: '/Users/([^\n||/]+)'
+    replace: '/home/vagrant'
+
+- name: (Optional) Copy over vagrant.zsh-theme
+  ignore_errors: true
+  copy:
+    src: ~/.oh-my-zsh/themes/vagrant.zsh-theme
+    dest: /home/vagrant/.oh-my-zsh/themes/robbyrussell.zsh-theme
+    force: true
+
+- name: Set zsh as default shell
+  become: true
+  user:
+    name: vagrant
+    shell: /usr/bin/zsh

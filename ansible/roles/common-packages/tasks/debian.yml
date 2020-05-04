@@ -1,0 +1,22 @@
+---
+- name: Update apt cache
+  become: true
+  apt:
+    update-cache: yes
+
+- name: Update all apt packages
+  become: true
+  apt:
+    upgrade: dist
+
+- name: Install apt specific packages
+  become: true
+  apt:
+    state: present
+    pkg:
+      - iputils-ping
+      - iputils-tracepath
+      - libssl-dev
+      - openssh-client
+      - openssh-server
+      - silversearcher-ag

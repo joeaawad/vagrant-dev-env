@@ -1,0 +1,14 @@
+---
+# Not necessary or desired on Amazon Linux 2
+# - name: Add Docker yum repository
+#   become: true
+#   yum_repository:
+#     name: docker
+#     description: Docker yum repository
+#     baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
+- name: Yum install docker
+  become: true
+  package:
+    name: "docker"
+    state: latest

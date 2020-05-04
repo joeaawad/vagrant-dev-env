@@ -1,0 +1,26 @@
+---
+- name: Install epel-release repo
+  become: true
+  yum:
+    state: present
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+- name: Update yum cache
+  become: true
+  yum:
+    update_cache: yes
+
+- name: Update all yum packages
+  become: true
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install yum specific packages
+  become: true
+  yum:
+    state: latest
+    name:
+      - iputils
+      - openssh
+      - the_silver_searcher

@@ -1,0 +1,6 @@
+---
+- name: Install python 3
+  become: true
+  package:
+    name: python3
+    state: latest
